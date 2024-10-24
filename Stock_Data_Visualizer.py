@@ -1,7 +1,9 @@
 import requests
 import matplotlib.pyplot as plt
 from datetime import datetime
-# Function to query Alpha Vantage API
+
+
+# Function to query 
 def get_stock_data(symbol, api_key, function='TIME_SERIES_DAILY'):
     url = f"https://www.alphavantage.co/query?function={function}&symbol={symbol}&apikey={api_key}&outputsize=full&datatype=json"
     response = requests.get(url)
@@ -12,12 +14,18 @@ def get_stock_data(symbol, api_key, function='TIME_SERIES_DAILY'):
     else:
         print("Error fetching data from Alpha Vantage API.")
         return None
-# Helper function to filter data by date
+    
+
+
+# function to filter
 def filter_by_date(data, start_date, end_date):
     time_series = data['Time Series (Daily)']
     filtered_data = {date: time_series[date] for date in time_series if start_date <= date <= end_date}
     return filtered_data
-# Function to plot stock data
+
+
+# Function plot
+
 def plot_stock_data(data, chart_type='line'):
     dates = list(data.keys())
     close_prices = [float(data[date]['4. close']) for date in dates]
@@ -40,7 +48,10 @@ def plot_stock_data(data, chart_type='line'):
     plt.tight_layout()
     
     plt.show()
-# Validate date inputs
+
+
+
+# Validate date
 def validate_dates(start_date, end_date):
     try:
         datetime.strptime(start_date, "%Y-%m-%d")
@@ -51,14 +62,20 @@ def validate_dates(start_date, end_date):
         print(f"Error: {e}")
         return False
     return True
-# Main Function
+
+
+
+# Main 
 def main():
-    api_key = 'OD3EFEVXOZ4MW4NC'  # Use your Alpha Vantage API key here
-    stock_symbol = input("Enter the stock symbol: ")  # e.g., 'AAPL'
+    api_key = 'JBO797IE308YL3XK'  
+    stock_symbol = input("Enter the stock symbol: ") 
     start_date = input("Enter start date (YYYY-MM-DD): ")
     end_date = input("Enter end date (YYYY-MM-DD): ")
     
-    # Validate date input
+
+
+
+    #Date 
     if validate_dates(start_date, end_date):
         stock_data = get_stock_data(stock_symbol, api_key)
         if stock_data:
